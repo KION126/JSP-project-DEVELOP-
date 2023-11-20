@@ -90,7 +90,7 @@ public class ControllerServlet extends HttpServlet {
 	      
 	      //서블릿에서 다음 페이지로 데이터를 넘기는 방법
 	      RequestDispatcher rd = null;
-	      if(viewPage.equals("index")) {
+	      if(viewPage.equals("index") || viewPage.equals("registerAction")) {
 	    	  rd = request.getRequestDispatcher("/" + viewPage + ".jsp");
 	      } else {
 	    	  rd = request.getRequestDispatcher("/WEB-INF/views/" + viewPage + ".jsp");

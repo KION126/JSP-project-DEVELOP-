@@ -31,15 +31,12 @@
 <body>
 <%
 	UserDAO userDao = new UserDAO();
-	String userID = null;
-	if(request.getParameter("userID") != null){
-		userID = request.getParameter("userID");
-	}
+	String userID = (String) session.getAttribute("userID");
 	
 	PrintWriter script = response.getWriter();
 	if(userID == null){
 		script.print("<script>");
-		script.print("alert('로그인을 해주세요.');");
+		script.print("alert('로그인을 해주세요.azz');");
 		script.print("history.back();");
 		script.print("</script>");
 		script.close();

@@ -10,18 +10,7 @@ String userEmail = null;
 String userPassword = null;
 String userPasswordRe = null;
 String userName = null;
-if(session.getAttribute("userID") != null){
-	userID = (String)session.getAttribute("userID");
-}
-if(userID != null){
-	PrintWriter script = response.getWriter();
-	script.print("<script>");
-	script.print("alert('로그인이 된 상태입니다.');");
-	script.print("location.href = 'index.jsp'");
-	script.print("</script>");
-	script.close();
-	return;
-}
+
 if (request.getParameter("userID") != null) {
 	userID = request.getParameter("userID");
 }
@@ -37,6 +26,7 @@ if (request.getParameter("userPasswordRe") != null) {
 if (request.getParameter("userName") != null) {
 	userName = request.getParameter("userName");
 }
+
 if (userID == null || userEmail == null || userPassword == null || userName == null) {
 	PrintWriter script = response.getWriter();
 	script.print("<script>");
@@ -50,7 +40,7 @@ if (userID == null || userEmail == null || userPassword == null || userName == n
 if (!userPasswordRe.equals(userPassword)) {
 	PrintWriter script = response.getWriter();
 	script.print("<script>");
-	script.print("alert('비밀번호 확인이 틀립니다.\n비밀번호 확인을 다시 입력해주세요.');");
+	script.print("alert('비밀번호 확인이 틀립니다.\\n비밀번호 확인을 다시 입력해주세요.');");
 	script.print("history.back();");
 	script.print("</script>");
 	script.close();
@@ -71,10 +61,15 @@ UserDAO DAO = new UserDAO();
 result = DAO.join(userDto);
 
 if (result == -1) {
-    request.setAttribute("errorMessage", "이미 존재하는 아이디입니다.");
+	PrintWriter script = response.getWriter();
+	script.print("<script>");
+	script.print("alert('이미 존재하는 아이디입니다.');");
+	script.print("history.back();");
+	script.print("</script>");
+	script.close();
 } else {
-    session.setAttribute("userID", userID);
-    response.sendRedirect("emailSendAction.jsp");
-    return;
-}
+	session.setAttribute("userID", userID);
+	response.sendRedirect("emailSendAction.jsp");
+	return;
+}	
 %>
