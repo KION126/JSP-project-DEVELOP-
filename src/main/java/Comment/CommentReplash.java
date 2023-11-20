@@ -25,9 +25,7 @@
 	    	String userID = null;
 	        int classID = 0;
 	        int boardID = 0;
-	        
-	        String commentContent = null;
-	        
+	        	        
 	        if(request.getParameter("userID") != null || request.getParameter("userID") != "") {
 	        	userID = request.getParameter("userID");
 	        }
@@ -36,9 +34,6 @@
 	        }
 	        if(Integer.parseInt(request.getParameter("boardID")) > 0) {
 	        	boardID = Integer.parseInt(request.getParameter("boardID"));
-	        }
-	        if(request.getParameter("commentContent") != null || request.getParameter("commentContent") != "") {
-	        	commentContent = request.getParameter("commentContent");
 	        }
 	        
 	        // userType가져오기

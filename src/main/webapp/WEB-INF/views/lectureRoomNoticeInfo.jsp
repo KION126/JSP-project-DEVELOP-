@@ -72,6 +72,8 @@
 							<h5 class="commentDate-h5">${comment.commentDate }</h5>
 							<h5 class="commentContent-h5">${comment.commentContent }</h5>
 						</div>
+						<button class="comment-modify" value="수정"></button>
+						<button class="comment-delete" value="삭제"></button>
 					</div>
 				</c:forEach>
 				<div class="pagination">

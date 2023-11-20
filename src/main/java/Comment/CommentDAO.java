@@ -31,7 +31,7 @@ public class CommentDAO {
         return -1;
     }
 	public int updateData(CommentDTO dto) {
-	    String sql = "UPDATE comment SET commentContent=?, commentDate=sysdate() WHERE boardType=? AND commentID=?";
+	    String sql = "UPDATE comment SET commentContent=?, commentDate=sysdate() WHERE commentID=?";
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
 	    try {
@@ -39,6 +39,7 @@ public class CommentDAO {
 	        pstmt = conn.prepareStatement(sql);
 
         	pstmt.setString(1, dto.getCommentContent().replace("\r\n", "<br>"));
+        	pstmt.setInt(2, dto.getCommentID());
 
 	        return pstmt.executeUpdate();
 	    } catch (Exception e) {
@@ -109,6 +110,7 @@ public class CommentDAO {
 
 	        while (rs.next()) {
 	        	CommentDTO commentInfo = new CommentDTO(
+	        			rs.getInt("commentID"),
 	                    rs.getString("userID"),
 	                    rs.getString("userName"),
 	                    rs.getString("commentContent"),

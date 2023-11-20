@@ -19,6 +19,10 @@
 				<h5 class="commentDate-h5">${comment.commentDate }</h5>
 				<h5 class="commentContent-h5">${comment.commentContent }</h5>
 			</div>
+			<c:if test="${userID eq comment.userID}">
+				<button class="comment-modify" onclick="commentModifyConfirm('${userID}', ${classID }, ${boardID }, ${currentPage }, ${comment.commentID }, '${comment.commentContent }')">수정</button>
+				<button class="comment-delete" onclick="commentDelete('${userID}', ${classID }, ${boardID }, ${comment.commentID })">삭제</button>
+			</c:if>
 		</div>
 	</c:forEach>
 	<div class="pagination">
@@ -35,5 +39,8 @@
 			</ul>
 		</nav>
 	</div>
+	<script src="./js/commentModifyConfirm.js" /></script>
+	<script src="./js/commentDelete.js" /></script>
+	<script src="./js/comment.js" /></script>
 </body>
 </html>

@@ -10,15 +10,22 @@ public class CommentDTO {
 	String commentContent;
 	String commentDate;
 
-	public CommentDTO(String userID, String userName, String commentContent, String commentDate) {
+	public CommentDTO(int commentID, String userID, String userName, String commentContent, String commentDate) {
 		super();
+		this.commentID = commentID;
 		this.userID = userID;
 		UserDAO DAO = new UserDAO();
 		this.userName = DAO.getUserName(userID);
 		this.commentContent = commentContent;
 		this.commentDate = commentDate;
 	}
-	
+
+	public CommentDTO(int commentID, String commentContent) {
+		super();
+		this.commentID = commentID;
+		this.commentContent = commentContent;
+	}
+
 	public CommentDTO(int boardID, String userID, String userName, String commentContent) {
 		super();
 		this.boardID = boardID;
