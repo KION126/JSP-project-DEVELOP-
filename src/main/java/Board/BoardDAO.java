@@ -37,7 +37,9 @@ public class BoardDAO {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    } finally {
-	        // 리소스 닫기
+	    	try {if (conn != null) conn.close();} catch (Exception e) {e.printStackTrace();}
+			try {if (pstmt != null) pstmt.close();} catch (Exception e) {e.printStackTrace();}
+			try {if (rs != null) rs.close();} catch (Exception e) {e.printStackTrace();}
 	    }
 	    return notice;
 	}
