@@ -10,7 +10,7 @@ import Board.BoardDTO;
 import util.DatabaseUtill;
 
 public class CommentDAO {
-	public int insertDate(CommentDTO dto) {
+	public int insertData(CommentDTO dto) {
         String sql = "INSERT INTO comment (boardID, userID, userName, commentContent, commentDate) VALUES (?, ?, ?, ?, sysdate())";
         Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -38,7 +38,7 @@ public class CommentDAO {
 	        conn = DatabaseUtill.getConnection();
 	        pstmt = conn.prepareStatement(sql);
 
-        	pstmt.setString(1, dto.getCommentContent().replace("\r\n", "<br>"));
+        	pstmt.setString(1, dto.getCommentContent());
         	pstmt.setInt(2, dto.getCommentID());
 
 	        return pstmt.executeUpdate();
@@ -113,7 +113,7 @@ public class CommentDAO {
 	        			rs.getInt("commentID"),
 	                    rs.getString("userID"),
 	                    rs.getString("userName"),
-	                    rs.getString("commentContent"),
+	                    rs.getString("commentContent".replaceAll("<br>", "\n")),
 	                    rs.getString("commentDate")
 	            );
 	            comment.add(commentInfo);

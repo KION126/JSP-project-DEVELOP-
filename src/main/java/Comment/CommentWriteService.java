@@ -59,7 +59,6 @@
 			// 해당 Notice 정보 가져오기
 			BoardDAO notice_dao = new BoardDAO();
 			List<BoardDTO> noticeInfoList = notice_dao.getDate(boardID);
-			notice_dao.hit(boardID);
 			
 			String not_Title = null;
 			String not_userID = null;
@@ -67,7 +66,6 @@
 			String not_Date = null;
 			String not_Con = null;
 			String not_File = null;
-			int not_Hit = 0;
 			
 			for (BoardDTO noticeInfo : noticeInfoList) {
 	            not_Title = noticeInfo.getboardTitle();
@@ -76,7 +74,6 @@
 				not_Date = noticeInfo.getboardDate();
 				not_Con = noticeInfo.getboardContent();
 				not_File = noticeInfo.getboardFile();
-				not_Hit = noticeInfo.getboardHit();
 	        }
 			
 			boolean userIDeqboardID = false;
@@ -95,7 +92,7 @@
 			int startRow = (currentPage - 1) * recordsPerPage;		
 			CommentDAO comment_dao = new CommentDAO();
 			if (!comment_dao.isCommentExists(boardID, userID, commentContent)) {
-			    comment_dao.insertDate(new CommentDTO(boardID, userID, userName, commentContent));
+			    comment_dao.insertData(new CommentDTO(boardID, userID, userName, commentContent));
 			}
 			
 			List<CommentDTO> commentInfoList = comment_dao.getLists(boardID, startRow, recordsPerPage);
@@ -117,9 +114,7 @@
 	        request.setAttribute("not_userName", not_userName);
 	        request.setAttribute("not_Date", not_Date);
 	        request.setAttribute("not_Con", not_Con);
-	        request.setAttribute("not_File", not_File);
-	        request.setAttribute("not_Hit", not_Hit);
-	        
+	        request.setAttribute("not_File", not_File);	        
 	        
 	        request.setAttribute("commentInfoList", commentInfoList);
 	        request.setAttribute("currentPage", currentPage);

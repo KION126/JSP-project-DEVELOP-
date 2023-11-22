@@ -634,6 +634,18 @@ input[id*="classRoomMenu-item"]:checked+label+div {
 	font-weight: bold;
 }
 
+.btn-preview-lectureContent {
+	width: 80px;
+	height: 30px;
+	font-size: 14px;
+	float: right;
+	border: none;
+	border-radius: 3px;
+	background-color: #776192;
+	color: #FFF;
+	font-weight: bold;
+}
+
 .btn-notice-write {
 	width: 70px;
 	height: 30px;

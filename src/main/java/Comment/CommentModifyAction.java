@@ -41,13 +41,12 @@
 	        	commentID = Integer.parseInt(request.getParameter("commentID"));
 	        }
 	        if(request.getParameter("commentContent") != null || request.getParameter("commentContent") != "") {
-	        	commentContent = request.getParameter("commentContent");
+	        	commentContent = request.getParameter("commentContent").replaceAll("\n", "<br>");
 	        }
 	        
 	        // userType가져오기
 	        UserDAO DAO = new UserDAO();
 			String userType = DAO.getUserType(userID);
-			String userName = DAO.getUserName(userID);
 	        
 	        // lecture 정보 가져오기
 	        ClassDAO class_dao = new ClassDAO();
@@ -62,15 +61,12 @@
 			// 해당 Notice 정보 가져오기
 			BoardDAO notice_dao = new BoardDAO();
 			List<BoardDTO> noticeInfoList = notice_dao.getDate(boardID);
-			notice_dao.hit(boardID);
-			
 			String not_Title = null;
 			String not_userID = null;
 			String not_userName = null;
 			String not_Date = null;
 			String not_Con = null;
 			String not_File = null;
-			int not_Hit = 0;
 			
 			for (BoardDTO noticeInfo : noticeInfoList) {
 	            not_Title = noticeInfo.getboardTitle();
@@ -79,7 +75,6 @@
 				not_Date = noticeInfo.getboardDate();
 				not_Con = noticeInfo.getboardContent();
 				not_File = noticeInfo.getboardFile();
-				not_Hit = noticeInfo.getboardHit();
 	        }
 			
 			boolean userIDeqboardID = false;
@@ -119,7 +114,6 @@
 	        request.setAttribute("not_Date", not_Date);
 	        request.setAttribute("not_Con", not_Con);
 	        request.setAttribute("not_File", not_File);
-	        request.setAttribute("not_Hit", not_Hit);
 	        
 	        
 	        request.setAttribute("commentInfoList", commentInfoList);

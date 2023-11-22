@@ -52,7 +52,10 @@
 					</table>
 			</div>
 			<div class="classRoom-contents">
-				<h5 style="font-weight: bold;">주제 별 학습 활동</h5>
+				<h5 style="font-weight: bold; display: inline;">주제 별 학습 활동</h5>
+				<c:if test="${userType eq lectuerType }">
+					<button class="btn-preview-lectureContent" onclick="lectureContentSetting('${userID }',${classID })">강의관리</button>
+				</c:if>
 			</div>
 			
 		</div>
@@ -74,5 +77,7 @@
 	<script src="./js/lectureRoomNotice.js" /></script>
 	<!-- lectureRoomNotice.js 추가 -->
 	<script src="./js/lectureRoomNoticeInfo.js" /></script>
+	<!-- lectureContentSetting.js 추가 -->
+	<script src="./js/lectureContentSetting.js" /></script>
 </body>
 </html>
