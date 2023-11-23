@@ -1,10 +1,9 @@
-function loadComments(userID, classID, boardID, currentPage) {
+function loadComments(classID, boardID, currentPage) {
     // Ajax로 댓글을 가져오는 부분
     $.ajax({
         type: 'post',
 		url: 'commentReflash.do',
-        data: {
-            userID: userID,
+        data: {	
             classID: classID,
             boardID: boardID,
             currentPage: currentPage
@@ -22,6 +21,6 @@ function loadComments(userID, classID, boardID, currentPage) {
 }
 
 // 페이지 전환 시 댓글을 다시 가져오도록 처리
-function comment(userID, classID, boardID, currentPage) {
-    loadComments(userID, classID, boardID, currentPage);
+function comment(classID, boardID, currentPage) {
+    loadComments(classID, boardID, currentPage);
 }

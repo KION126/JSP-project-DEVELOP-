@@ -1,7 +1,6 @@
 <%@page import="Lecture.ClassDTO"%>
 <%@page import="Lecture.ClassDAO"%>
 <%@page import="java.util.List"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -52,7 +51,6 @@
 				<form class="search-form" action="lectureSearch.do" method="post">
 					<div class="input-group">
 						<input type="text" class="form-control" name="keyword" placeholder="검색어 입력" aria-label="검색어 입력" aria-describedby="button-addon" id="searchbar">
-						<input type="hidden" name="userID" value="<%=userID%>">
 						<div class="input-group-append">
 							<button type="submit" id="btn-search">
 								<img src="./image/icon/search.png" alt="search" style="max-width: 100%;">
@@ -64,15 +62,16 @@
 		</div>
 		<div class="row">
 			<div class="col-2" style="text-align: center;"></div>
-			<div class="col-9" style="text-align: center; margin-left: 30px;">
-				<div class="button-container">
-					<button class="custom-button" id="searchbtn" onclick="lectureSearch('<%=userID %>','프로그래밍')">프로그래밍</button>
-					<button class="custom-button" id="searchbtn" onclick="lectureSearch('<%=userID %>','디자인')">디자인</button>
-					<button class="custom-button" id="searchbtn" onclick="lectureSearch('<%=userID %>','재테크')">재테크</button>
-					<button class="custom-button" id="searchbtn" onclick="lectureSearch('<%=userID %>','마케팅')">마케팅</button>
-					<button class="custom-button" id="searchbtn" onclick="lectureSearch('<%=userID %>','IT')">IT/기술</button>
-					<button class="custom-button" id="searchbtn" onclick="lectureSearch('<%=userID %>','교육')">교육</button>
-					<button class="custom-button" id="searchbtn" onclick="lectureSearch('<%=userID %>','경제')">경제</button>
+			<div class="col-9">
+				<div class="indexSearchKeyword-container">
+					<a class="searchKeyword" href="lectureSearch.do?keyword=프로그래밍">프로그래밍</a>
+					<a class="searchKeyword" href="lectureSearch.do?keyword=재테크">재테크</a>
+					<a class="searchKeyword" href="lectureSearch.do?keyword=마케팅">마케팅</a>
+					<a class="searchKeyword" href="lectureSearch.do?keyword=IT">IT</a>
+					<a class="searchKeyword" href="lectureSearch.do?keyword=교육">교육</a>
+					<a class="searchKeyword" href="lectureSearch.do?keyword=경제">경제</a>
+					<a class="searchKeyword" href="lectureSearch.do?keyword=간호">간호</a>
+					<a class="searchKeyword" href="lectureSearch.do?keyword=디자인">디자인</a>
 				</div>
 			</div>
 		</div>
@@ -101,7 +100,7 @@
                 	topImg = "null";
                 }
 			%>
-			<div class="card <%=cardClass %>" onclick="lectureInfo('<%=userID%>', <%=classInfo.getClassID()%>)">
+			<div class="card <%=cardClass %>" onclick="lectureInfo(<%=classInfo.getClassID()%>)">
 				<img src="./image/<%=topImg %>.png" style="height: 100px; width: 100px; position: absolute; float: left;">
 				<img src="<%= classInfo.getClassImg() %>" class="card-img-top" alt="...">
 				<div class="card-body" style="font-weight: bold; padding: 5px;">

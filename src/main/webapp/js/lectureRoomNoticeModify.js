@@ -1,15 +1,8 @@
-function lectureRoomNoticeModify(userID, classID, boardID) {
+function lectureRoomNoticeModifyConfirm(classID, boardID) {
 		// 동적으로 form 생성
 	    var form = document.createElement('form');
 	    form.method = 'post';
-	    form.action = 'lectureRoomNoticeWrite.do';
-
-	    // userID를 전달하는 hidden input 추가
-	    var userIDInput = document.createElement('input');
-	    userIDInput.type = 'hidden';
-	    userIDInput.name = 'userID';
-	    userIDInput.value = userID;
-	    form.appendChild(userIDInput);
+	    form.action = 'lectureRoomNoticeModifyConfirm.do';
 
 	    // classID를 전달하는 hidden input 추가
 	    var classIDInput = document.createElement('input');

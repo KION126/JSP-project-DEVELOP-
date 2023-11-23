@@ -1,4 +1,4 @@
-package LectureService;
+package Lecture;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -6,24 +6,30 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import CommandHandler.CommandHandler;
-import Lecture.ClassDAO;
-import Lecture.ClassDTO;
 
-public class LectureSearchService implements CommandHandler{
+public class LectureSearch implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		System.out.println(request.getParameter("userID"));
-		
+
 		// lectureSearch.do 요청에 의한 처리 부분
-		String userID = request.getParameter("userID");
-		String keyword = request.getParameter("keyword");
+		String userID = null;
+		String keyword = null;
 		
-		// 검색된 강좌 정보 가져오기.
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userID") != null) {
+			userID = (String) session.getAttribute("userID");
+		}
+		
+		// 전체 검색을 위해 null예외처리 하지 않음
+		keyword = request.getParameter("keyword");
+		
+		// keyword로 강의 리스트 가져오기
 		ClassDAO dao = new ClassDAO();
 	    List<ClassDTO> classInfoList = dao.searchClassesByKeyword(keyword);
 		

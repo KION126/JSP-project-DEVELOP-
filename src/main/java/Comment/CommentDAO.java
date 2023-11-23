@@ -94,6 +94,45 @@ public class CommentDAO {
 
 	    return -1;
 	}
+	public int deleteBoardComment(int boardID) {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+
+	    try {
+	        conn = DatabaseUtill.getConnection();
+	        conn.setAutoCommit(false);  // 트랜잭션 시작
+
+	        String sql = "DELETE FROM comment WHERE boardID = ?";
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, boardID);
+
+	        int result = pstmt.executeUpdate();
+
+	        if (result > 0) {
+	            conn.commit();  // 트랜잭션 커밋
+	        } else {
+	            conn.rollback();  // 트랜잭션 롤백
+	        }
+
+	        return result;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        try {
+	            if (conn != null) conn.rollback();  // 예외 발생 시 롤백
+	        } catch (Exception rollbackEx) {
+	            rollbackEx.printStackTrace();
+	        }
+	    } finally {
+	        try {
+	            if (pstmt != null) pstmt.close();
+	            if (conn != null) conn.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return -1;
+	}
 	public List<CommentDTO> getLists(int boardID, int startRow, int endRow) {
 	    List<CommentDTO> comment = new ArrayList<>();
 	    String sql = "SELECT * FROM comment WHERE boardID = ? ORDER BY commentID DESC LIMIT ?, ?";

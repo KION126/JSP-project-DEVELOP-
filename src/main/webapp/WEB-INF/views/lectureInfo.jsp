@@ -43,7 +43,7 @@
 					
 					<c:choose>
 						<c:when test="${classEnrolChecked}">
-	    					<button id="btn_classRoom" onclick="lectureRoom('${userID}',${classID})">강의실 입장</button>
+	    					<button id="btn_classRoom" onclick="lectureRoom(${classID})">강의실 입장</button>
 						</c:when>
 						<c:otherwise>
 							<button id="btn_classApp" onclick="lectureEnrol('${userID}',${classID}, ${userEmailChecked})">수강신청하기</button>

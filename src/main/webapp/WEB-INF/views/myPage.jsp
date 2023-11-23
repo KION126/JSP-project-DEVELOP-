@@ -65,7 +65,7 @@
 							                ${lecture.classVideoNum}
 							            </div>
 							            <div class='col-3 enrolClass-row-btn-col'>
-							                <button class='btn_classApp2' onclick="lectureRoom('${userID}',${lecture.classID})">
+							                <button class='btn_classApp2' onclick="lectureRoom(${lecture.classID})">
 							                    <p class='p_classApp2'>강의실 입장</p>
 							                </button>
 							            </div>

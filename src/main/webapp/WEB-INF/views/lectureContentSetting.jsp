@@ -34,8 +34,29 @@
 			<a style="font-weight: bold;" href="javascript:lectureRoomNotice('${userID}', ${classID }, 1)">강의 관리</a>
 			<div class="classRoom-notice" style="height: 700px;">
 				<h3 style="font-weight: bold; text-align: center;">강의 관리</h3>
+				<c:forEach var="lectureContent" items="${lectureContentInfoList}">
+					<table class="lectureContent-table">
+					<thead>
+						<tr>
+							<th class="noticeInfo-head-th" scope="col">${not_Title }</th>
+						</tr>
+						<tr class="noticeInfo-tr">
+							<th class="noticeInfo-th">강의영상:
+							<a href="javascript:lectureRoomBoardDownload('${userID}', ${classID }, ${boardID })">${not_File }</a></th>
+						</tr>
+						<tr class="noticeInfo-tr">
+							<th class="noticeInfo-th">첨부파일:
+							<a href="javascript:lectureRoomBoardDownload('${userID}', ${classID }, ${boardID })">${not_File }</a></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="noticeInfo-tr">
+							<th class="noticeInfo-con-th">${not_Con }</th>
+						</tr>
+					</tbody>
+				</table>
+				</c:forEach>
 			</div>
-			
 		</div>
 	</div>
 

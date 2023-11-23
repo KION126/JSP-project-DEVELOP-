@@ -15,7 +15,6 @@ h5 {
 	font-size: 18px;
 	white-space: nowrap; /* 줄바꿈 금지 */
 }
-
 a {
 	text-decoration: none;
 	color: #000;
@@ -944,3 +943,12 @@ btn-notice-write-cancle{
 	float: right;
 	margin-right: 10px;
 }
+.searchKeyword{
+	color: #FFF;
+	margin-right: 10px;
+}
+.indexSearchKeyword-container{
+	margin-top: 5px;
+	margin-left: 30px;
+}
+

@@ -18,13 +18,6 @@ function lectureEnrol(userID, classID, userEmailChecked) {
         form.method = 'post';
         form.action = 'lectureEnrol.do';
 
-        // userID를 전달하는 hidden input 추가
-        var userIDInput = document.createElement('input');
-        userIDInput.type = 'hidden';
-        userIDInput.name = 'userID';
-        userIDInput.value = userID;
-        form.appendChild(userIDInput);
-
         // classID를 전달하는 hidden input 추가
         var classIDInput = document.createElement('input');
         classIDInput.type = 'hidden';

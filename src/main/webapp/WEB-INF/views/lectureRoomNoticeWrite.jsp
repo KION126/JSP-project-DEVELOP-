@@ -30,12 +30,17 @@
     <div class="row" style="height: 800px;">
         <%@ include file="layout/lectureRoomSideBar.jsp" %>
         <div class="col-8 classRoom-main-container">
-            <a href="javascript:lectureRoom('${userID}',${classID})">강의실 홈</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
-            <a href="javascript:lectureRoomNotice('${userID}', ${classID }, 1)">강의 공지</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
-            <a style="font-weight: bold;" href="javascript:lectureRoomNoticeWrite('${userID}', ${classID })">강의 공지 글쓰기</a>
+            <a href="javascript:lectureRoom(${classID})">강의실 홈</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
+            <a href="javascript:lectureRoomNotice(${classID }, 1)">강의 공지</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
+            <a style="font-weight: bold;" href="javascript:lectureRoomNoticeWrite(${classID })">강의 공지 글쓰기</a>
             <div class="classRoom-notice" style="height: 700px;">
                 <h3 style="font-weight: bold; text-align: center;">강의 공지</h3>
-					<form action="<c:choose><c:when test='${boardID > 0}'>lectureRoomNoticeModifyAction.do</c:when><c:otherwise>lectureRoomNoticeWriteAction.do</c:otherwise></c:choose>" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+					<form action="
+					<c:choose>
+						<c:when test='${boardID > 0}'>lectureRoomNoticeModifyAction.do</c:when>
+						<c:otherwise>lectureRoomNoticeWriteAction.do</c:otherwise>
+					</c:choose>
+					" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 					<div class="classRoom-notice-container">
                         <div class="row notice-title-container">
                             <div class="col-2">
@@ -67,7 +72,7 @@
                     <input type="hidden" name="classID" value="${classID}">
                     <input class="btn-notice-write" type="submit" <c:choose><c:when test='${boardID > 0}'>value="수정"</c:when><c:otherwise>value="작성"</c:otherwise></c:choose>>
                 </form>
-                    <button class="btn-notice-modefy-cancle" onclick="javascript:lectureRoomNotice('${userID}', ${classID }, 1)">취소</button>
+                    <button class="btn-notice-modefy-cancle" onclick="javascript:lectureRoomNotice(${classID }, 1)">취소</button>
             </div>
         </div>
     </div>

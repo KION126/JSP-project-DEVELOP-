@@ -30,9 +30,9 @@
 	<div class="row" style="height: 1500px;">
 		<%@ include file="layout/lectureRoomSideBar.jsp" %>
 		<div class="col-8 classRoom-main-container">
-			<a href="javascript:lectureRoom('${userID}',${classID})">강의실 홈</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
-			<a href="javascript:lectureRoomNotice('${userID}', ${classID }, 1)">강의 공지</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
-			<a style="font-weight: bold;" href="javascript:lectureRoomNoticeInfo('${userID}', ${classID }, ${boardID })">${not_Title }</a>
+			<a href="javascript:lectureRoom(${classID})">강의실 홈</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
+			<a href="javascript:lectureRoomNotice(${classID }, 1)">강의 공지</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
+			<a style="font-weight: bold;" href="javascript:lectureRoomNoticeInfo(${classID }, ${boardID })">${not_Title }</a>
 			<div class="classRoom-notice" style="height: 600px;">
 				<h3 style="font-weight: bold; text-align: center;">강의 공지</h3>
 				<table class="noticeInfo-table">
@@ -46,7 +46,7 @@
 						</tr>
 						<tr class="noticeInfo-tr">
 							<th class="noticeInfo-th">첨부파일:
-							<a href="javascript:lectureRoomBoardDownload('${userID}', ${classID }, ${boardID })">${not_File }</a></th>
+							<a href="javascript:lectureRoomBoardDownload(${classID }, ${boardID})">${not_File }</a></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -56,8 +56,8 @@
 					</tbody>
 				</table>
 				<c:if test="${userIDeqboardID}">
-					<button class="btn-notice-delete" onclick="lectureRoomNoticeDelete('${userID}', ${classID }, ${boardID })">삭제</button>
-					<button class="btn-notice-modify" onclick="lectureRoomNoticeModify('${userID}', ${classID }, ${boardID })">수정</button>
+					<button class="btn-notice-delete" onclick="lectureRoomNoticeDeleteAction(${classID }, ${boardID })">삭제</button>
+					<button class="btn-notice-modify" onclick="lectureRoomNoticeModifyConfirm(${classID }, ${boardID })">수정</button>
 				</c:if>
 			</div>
 			<c:if test="${commentInfoList.size() > 0 }">
@@ -81,18 +81,18 @@
 				         <ul class="pagination">
                             <%-- 이전 링크 --%>
                             <li class="page-item ${currentPage < 2 ? 'disabled' : ''}">
-                                <a class="page-link" href="javascript:comment('${userID}',${classID },${boardID },${currentPage - 1 })">이전</a></li>
+                                <a class="page-link" href="javascript:comment(${classID },${boardID },${currentPage - 1 })">이전</a></li>
 
                             <%-- 페이지 번호 링크 --%>
                             <c:forEach var="i" begin="1" end="${totalPages}">
                                 <li class="page-item ${i == currentPage ? 'active' : ''}">
-                                    <a class="page-link" href="javascript:comment('${userID}',${classID },${boardID },${i })">${i }</a>
+                                    <a class="page-link" href="javascript:comment(${classID },${boardID },${i })">${i }</a>
                                 </li>
                             </c:forEach>
 
-                            <%-- 다음 링크 --%>
+                            <%-- 다음 링크 --%>	
                             <li class="page-item ${currentPage > totalPages-1 ? 'disabled' : ''}">
-                                <a class="page-link" href="javascript:comment('${userID}',${classID },${boardID },${currentPage + 1 })">다음</a></li>
+                                <a class="page-link" href="javascript:comment(${classID },${boardID },${currentPage + 1 })">다음</a></li>
                         	</ul>
 					    </nav>
 					</div>
@@ -102,7 +102,6 @@
 			<div class="notice-comment-write-conteiner">
 				<form action="commentWrite.do" method="post">
 					<textarea class="notice-comment-textarea" name="commentContent" maxlength="200" placeholder="댓글 작성(200자 이내)"></textarea>	
-					<input type="hidden" name="userID" value="${userID }">
 					<input type="hidden" name="classID" value="${classID }">
 					<input type="hidden" name="boardID" value="${boardID }">
 					<input class="btn-comment-write" type="submit" value="작성">
@@ -148,11 +147,10 @@
 	<script type="text/javascript">
 		// 페이지가 로드될 때 초기 댓글을 가져옴
 		$(document).ready(function () {
-		    var userID = '${userID}';
 		    var classID = ${classID};
 		    var boardID = ${boardID};
 		    var currentPage = ${currentPage};
-		    loadComments(userID, classID, boardID, currentPage);
+		    loadComments(classID, boardID, currentPage);
 		});
 	</script>
 </body>

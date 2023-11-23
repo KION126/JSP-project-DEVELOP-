@@ -1,11 +1,10 @@
-function commentModifyAction(userID, classID, boardID, commentID, commentContent) {
+function commentModifyAction(classID, boardID, commentID, commentContent) {
 	
 	var commentContent = $("#commentContent").val();
 	$.ajax({
 	    type: 'post',
 		url: 'commentModifyAction.do',
 	    data: {
-	        userID: userID,
 	        classID: classID,
 	        boardID: boardID,
 	        commentID: commentID,

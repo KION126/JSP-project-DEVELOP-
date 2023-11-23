@@ -1,9 +1,8 @@
-function commentModifyConfirm(userID, classID, boardID, currentPage, commentID, commentContent) {
+function commentModifyConfirm(classID, boardID, currentPage, commentID, commentContent) {
 		$.ajax({
         type: 'post',
 		url: 'commentModifyConfirm.do',
         data: {
-            userID: userID,
             classID: classID,
             boardID: boardID,
             currentPage: currentPage,

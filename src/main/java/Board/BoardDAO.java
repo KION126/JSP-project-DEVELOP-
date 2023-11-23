@@ -292,10 +292,10 @@ public class BoardDAO {
 
 	        // 검색 옵션에 따라서 ?에 대입할 값이 1개 또는 2개가 됨
 	        if (searchOption.equals("title") || searchOption.equals("content")) {
-	            pstmt.setString(2, "%" + searchKeyword + "%");
-	        } else if (searchOption.equals("titleAndContent")) {
-	            pstmt.setString(2, "%" + searchKeyword + "%");
 	            pstmt.setString(3, "%" + searchKeyword + "%");
+	        } else if (searchOption.equals("titleAndContent")) {
+	            pstmt.setString(3, "%" + searchKeyword + "%");
+	            pstmt.setString(4, "%" + searchKeyword + "%");
 	        }
 
 	        rs = pstmt.executeQuery();
@@ -321,7 +321,7 @@ public class BoardDAO {
 	    ResultSet rs = null;
 
 	    // SQL 쿼리를 검색 옵션에 따라 다르게 작성
-	    String sql = "SELECT * FROM notice WHERE boardType=? AND classID = ? AND ";
+	    String sql = "SELECT * FROM board WHERE boardType=? AND classID = ? AND ";
 	    if (searchOption.equals("title")) {
 	        sql += "boardTitle LIKE ?";
 	    } else if (searchOption.equals("content")) {
@@ -340,14 +340,14 @@ public class BoardDAO {
 
 	        // 검색 옵션에 따라서 ?에 대입할 값이 1개 또는 2개가 됨
 	        if (searchOption.equals("title") || searchOption.equals("content")) {
-	            pstmt.setString(2, "%" + searchKeyword + "%");
-	            pstmt.setInt(3, startRow);
-	            pstmt.setInt(4, endRow);
-	        } else if (searchOption.equals("titleAndContent")) {
-	            pstmt.setString(2, "%" + searchKeyword + "%");
 	            pstmt.setString(3, "%" + searchKeyword + "%");
 	            pstmt.setInt(4, startRow);
 	            pstmt.setInt(5, endRow);
+	        } else if (searchOption.equals("titleAndContent")) {
+	            pstmt.setString(3, "%" + searchKeyword + "%");
+	            pstmt.setString(4, "%" + searchKeyword + "%");
+	            pstmt.setInt(5, startRow);
+	            pstmt.setInt(6, endRow);
 	        }
 
 	        rs = pstmt.executeQuery();

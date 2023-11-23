@@ -1,4 +1,4 @@
-function lectureRoomNoticeDelete(userID, classID, boardID) {
+function lectureRoomNoticeDeleteAction(classID, boardID) {
         // confirm으로 확인 메시지 표시
         var result = confirm("정말로 삭제하시겠습니까?");
 
@@ -7,14 +7,7 @@ function lectureRoomNoticeDelete(userID, classID, boardID) {
             // 동적으로 form 생성
             var form = document.createElement('form');
             form.method = 'post';
-            form.action = 'lectureRoomNoticeDelete.do';
-
-            // userID를 전달하는 hidden input 추가
-            var userIDInput = document.createElement('input');
-            userIDInput.type = 'hidden';
-            userIDInput.name = 'userID';
-            userIDInput.value = userID;
-            form.appendChild(userIDInput);
+            form.action = 'lectureRoomNoticeDeleteAction.do';
 
             // classID를 전달하는 hidden input 추가
             var classIDInput = document.createElement('input');

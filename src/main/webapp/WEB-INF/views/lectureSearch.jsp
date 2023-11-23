@@ -42,7 +42,6 @@
                     <div class="input-group">
                         <input type="text" class="form-control" name="keyword" placeholder="검색어 입력"
                                aria-label="검색어 입력" aria-describedby="button-addon" id="classSearchbar">
-                        <input type="hidden" name="userID" value="<%=userID%>">
                         <div class="input-group-append">
                             <button type="submit" id="btn-search">
                                 <img src="./image/icon/search.png" alt="search" style="max-width: 100%;">
@@ -64,7 +63,7 @@
             </div>
             <c:forEach var="classInfo" items="${classInfoList}">
                 <div class="card classCard_search"
-                     onclick="lectureInfo('<%=userID%>', ${classInfo.classID})">
+                     onclick="lectureInfo(${classInfo.classID})">
                     <img src="${classInfo.classImg}" class="card-img-top" alt="...">
                     <div class="card-body" style="font-weight: bold; padding: 5px;">
                         <span>${classInfo.classTitle}</span><br>

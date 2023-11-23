@@ -1,4 +1,4 @@
-function commentDelete(userID, classID, boardID, commentID) {
+function commentDelete(classID, boardID, commentID) {
     // confirm으로 확인 메시지 표시
     var result = confirm("정말로 삭제하시겠습니까?");
 
@@ -9,7 +9,6 @@ function commentDelete(userID, classID, boardID, commentID) {
 	        type: 'post',
 			url: 'commentDelete.do',
 	        data: {
-	            userID: userID,
 	            classID: classID,
 	            boardID: boardID,
 	            commentID: commentID

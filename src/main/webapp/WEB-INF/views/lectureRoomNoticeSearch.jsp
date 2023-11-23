@@ -30,8 +30,8 @@
 	<div class="row" style="height: 800px;">
 		<%@ include file="layout/lectureRoomSideBar.jsp" %>
 		<div class="col-8 classRoom-main-container">
-			<a href="javascript:lectureRoom('${userID}',${classID})">강의실 홈</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
-			<a style="font-weight: bold;" href="javascript:lectureRoomNotice('${userID}', ${classID }, 1)">강의 공지</a>
+			<a href="javascript:lectureRoom(${classID})">강의실 홈</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
+			<a style="font-weight: bold;" href="javascript:lectureRoomNotice(${classID }, 1)">강의 공지</a>
 			<div class="classRoom-notice" style="height: 700px;">
 				<h3 style="font-weight: bold; text-align: center;">강의 공지</h3>
 				<div class="notice-search-container">
@@ -42,11 +42,10 @@
 				            <option value="titleAndContent">제목+내용</option>
 				        </select>
 				        <input class="notice-search-input" type="text" id="searchKeyword" name="searchKeyword" placeholder="검색어를 입력하세요">
-				        <input type="hidden" name="userID" value="${userID }">
 				        <input type="hidden" name="classID" value="${classID }">
 				        <button type="submit" class="btn-notice-search">검색</button>
-				        <button type="button" class="btn-notice-search" onclick="javascript:lectureRoomNotice('${userID}', ${classID }, 1)">검색 취소</button>
-				        <button type="button" class="btn-notice-write" onclick="lectureRoomNoticeWrite('${userID }',${classID })">글쓰기</button>
+				        <button type="button" class="btn-notice-search" onclick="javascript:lectureRoomNotice(${classID }, 1)">검색 취소</button>
+				        <button type="button" class="btn-notice-write" onclick="lectureRoomNoticeWrite(${classID })">글쓰기</button>
 				    </form>
 				</div>
 				<table class="table table-striped table-hover">
@@ -62,12 +61,12 @@
 	
 					<tbody>
 						<c:forEach var="noticeInfo" items="${noticeInfoList}">
-							<tr class="notice-tr" onclick="classRoomNoticeInfo(${noticeInfo.boardID })">						
+							<tr class="notice-tr" onclick="lectureRoomNoticeInfo(${classID },${noticeInfo.boardID })">						
 								<th scope="row" class="noc-th">${noticeInfo.boardID }</th>
 								<th class="noc-th">${noticeInfo.boardTitle }</th>
 								<th class="noc-th">${noticeInfo.userName }</th>
 								<th class="noc-th">${noticeInfo.boardDate }</th>
-								<%-- <th class="noc-th">${noticeInfo.noticeClick }</th> --%>
+								<th class="noc-th">${noticeInfo.boardHit }</th>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -75,20 +74,40 @@
 				<div class="pagination">
 				    <nav class="pagination-nav" aria-label="Page navigation example">
 				         <ul class="pagination">
+				         <c:choose>
+				         <c:when test="${searchKeyword != null }">
                             <%-- 이전 링크 --%>
                             <li class="page-item ${currentPage < 2 ? 'disabled' : ''}">
-                                <a class="page-link" href="javascript:lectureRoomNotice('${userID}',${classID },${currentPage - 1 })">이전</a></li>
+                                <a class="page-link" href="javascript:lectureRoomNoticeSearch(${classID },${currentPage - 1 },'${searchOption }','${searchKeyword }')">이전</a></li>
 
                             <%-- 페이지 번호 링크 --%>
                             <c:forEach var="i" begin="1" end="${totalPages}">
                                 <li class="page-item ${i == currentPage ? 'active' : ''}">
-                                    <a class="page-link" href="javascript:lectureRoomNotice('${userID}',${classID },${i })">${i }</a>
+                                    <a class="page-link" href="javascript:lectureRoomNoticeSearch(${classID },${i },'${searchOption }','${searchKeyword }')">${i }</a>
                                 </li>
                             </c:forEach>
 
                             <%-- 다음 링크 --%>
                             <li class="page-item ${currentPage > totalPages-1 ? 'disabled' : ''}">
-                                <a class="page-link" href="javascript:lectureRoomNotice('${userID}',${classID },${currentPage + 1 })">다음</a></li>
+                                <a class="page-link" href="javascript:lectureRoomNoticeSearch(${classID },${currentPage + 1 },'${searchOption }','${searchKeyword }')">다음</a></li>
+                        </c:when>
+                        <c:otherwise>
+                        	<%-- 이전 링크 --%>
+                            <li class="page-item ${currentPage < 2 ? 'disabled' : ''}">
+                                <a class="page-link" href="javascript:lectureRoomNotice(${classID },${currentPage - 1 })">이전</a></li>
+
+                            <%-- 페이지 번호 링크 --%>
+                            <c:forEach var="i" begin="1" end="${totalPages}">
+                                <li class="page-item ${i == currentPage ? 'active' : ''}">
+                                    <a class="page-link" href="javascript:lectureRoomNotice(${classID },${i })">${i }</a>
+                                </li>
+                            </c:forEach>
+
+                            <%-- 다음 링크 --%>
+                            <li class="page-item ${currentPage > totalPages-1 ? 'disabled' : ''}">
+                                <a class="page-link" href="javascript:lectureRoomNotice(${classID },${currentPage + 1 })">다음</a></li>
+                        </c:otherwise>
+                        </c:choose>
                         </ul>
 				    </nav>
 				</div>
@@ -112,5 +131,7 @@
 	<script src="./js/lectureRoomNoticeSearch.js" /></script>
 	<!-- lectureRoomNoticeWrite.js 추가 -->
 	<script src="./js/lectureRoomNoticeWrite.js" /></script>
+	<!-- lectureRoomNoticeInfo.js 추가 -->
+	<script src="./js/lectureRoomNoticeInfo.js" /></script>
 </body>
 </html>

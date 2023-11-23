@@ -76,26 +76,26 @@ public class ControllerServlet extends HttpServlet {
 		//비즈니스 로직 처리
 		String command = request.getRequestURI();
 	      
-	      command = command.substring(request.getContextPath().length() + 1);      
-	      
-	      CommandHandler handler = commandHandlerMap.get(command);
-	      
-	      String viewPage = null;
-
-	      try {
-	         viewPage = handler.process(request, response);
-	      } catch (Exception e) {
-	         throw new ServletException(e);
-	      }
-	      
-	      //서블릿에서 다음 페이지로 데이터를 넘기는 방법
-	      RequestDispatcher rd = null;
-	      if(viewPage.equals("index") || viewPage.equals("registerAction")) {
-	    	  rd = request.getRequestDispatcher("/" + viewPage + ".jsp");
-	      } else {
-	    	  rd = request.getRequestDispatcher("/WEB-INF/views/" + viewPage + ".jsp");
-	      }
-	      rd.forward(request, response);
+		command = command.substring(request.getContextPath().length() + 1);      
+		  
+		CommandHandler handler = commandHandlerMap.get(command);
+		  
+		String viewPage = null;
+		
+		try {
+		   viewPage = handler.process(request, response);
+		} catch (Exception e) {
+		   throw new ServletException(e);
+		}
+		  
+		//서블릿에서 다음 페이지로 데이터를 넘기는 방법
+		RequestDispatcher rd = null;
+		if(viewPage.equals("index") || viewPage.equals("registerAction")) {
+		rd = request.getRequestDispatcher("/" + viewPage + ".jsp");
+		} else {
+		 rd = request.getRequestDispatcher("/WEB-INF/views/" + viewPage + ".jsp");
+		}
+		rd.forward(request, response);
 	}
 
 }

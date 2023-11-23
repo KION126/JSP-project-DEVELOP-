@@ -27,8 +27,8 @@
 					</c:choose>
 				</div>
 				<c:if test="${userID eq comment.userID}">
-					<button class="comment-modify" onclick="commentModifyAction('${userID}', ${classID }, ${boardID }, ${comment.commentID }, '${comment.commentContent }')">수정</button>
-					<button class="comment-modifyCancle" onclick="comment('${userID}', ${classID }, ${boardID }, ${currentPage })">취소</button>
+					<button class="comment-modify" onclick="commentModifyAction(${classID }, ${boardID }, ${comment.commentID }, '${comment.commentContent }')">수정</button>
+					<button class="comment-modifyCancle" onclick="comment(${classID }, ${boardID }, ${currentPage })">취소</button>
 				</c:if>
 		</div>
 	</c:forEach>
@@ -36,13 +36,13 @@
 		<nav class="pagination-nav" aria-label="Page navigation example">
 			<ul class="pagination">
 				<%-- 이전 링크 --%>
-				<li class="page-item ${currentPage < 2 ? 'disabled' : ''}"><a class="page-link" href="javascript:comment('${userID}',${classID },${boardID },${currentPage - 1 })">이전</a></li> <%-- 페이지 번호 링크 --%>
+				<li class="page-item ${currentPage < 2 ? 'disabled' : ''}"><a class="page-link" href="javascript:comment(${classID },${boardID },${currentPage - 1 })">이전</a></li> <%-- 페이지 번호 링크 --%>
 				<c:forEach var="i" begin="1" end="${totalPages}">
-					<li class="page-item ${i == currentPage ? 'active' : ''}"><a class="page-link" href="javascript:comment('${userID}',${classID },${boardID },${i })">${i }</a></li>
+					<li class="page-item ${i == currentPage ? 'active' : ''}"><a class="page-link" href="javascript:comment(${classID },${boardID },${i })">${i }</a></li>
 				</c:forEach>
 
 				<%-- 다음 링크 --%>
-				<li class="page-item ${currentPage > totalPages-1 ? 'disabled' : ''}"><a class="page-link" href="javascript:comment('${userID}',${classID },${boardID },${currentPage + 1 })">다음</a></li>
+				<li class="page-item ${currentPage > totalPages-1 ? 'disabled' : ''}"><a class="page-link" href="javascript:comment(${classID },${boardID },${currentPage + 1 })">다음</a></li>
 			</ul>
 		</nav>
 	</div>

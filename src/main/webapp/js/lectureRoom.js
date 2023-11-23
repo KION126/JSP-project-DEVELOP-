@@ -1,14 +1,7 @@
-function lectureRoom(userID, classID) {
+function lectureRoom(classID) {
 	var form = document.createElement('form');
     form.method = 'post';
     form.action = 'lectureRoom.do';
-
-    // userID를 전달하는 hidden input 추가
-    var userIDInput = document.createElement('input');
-    userIDInput.type = 'hidden';
-    userIDInput.name = 'userID';
-    userIDInput.value = userID;
-    form.appendChild(userIDInput);
 
     // classID를 전달하는 hidden input 추가
     var classIDInput = document.createElement('input');

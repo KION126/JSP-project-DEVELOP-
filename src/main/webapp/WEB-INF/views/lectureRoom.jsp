@@ -31,11 +31,11 @@
 		<div class="col-8 classRoom-main-container" style="float: left;">
 			<div class="classRoom-preview">
 					<h5 style="font-weight: bold; display: inline;">강의공지</h5>
-					<button class="btn-preview-notice" onclick="lectureRoomNotice('${userID}', ${classID }, 1)">+</button>
+					<button class="btn-preview-notice" onclick="lectureRoomNotice(${classID }, 1)">+</button>
 					<table class="notice-preview">
 					<c:forEach var="notice" items="${noticeInfos}">
 						<tr>
-							<th class="notice-preview-th"><a href="#" onclick="lectureRoomNoticeInfo('${userID }',${classID },${notice.boardID })">${notice.boardTitle }</a></th>
+							<th class="notice-preview-th"><a href="#" onclick="lectureRoomNoticeInfo(${classID },${notice.boardID })">${notice.boardTitle }</a></th>
 							<th class="notice-preview-th" style="text-align: right;">${notice.boardDate }</th>	
 						</tr>
 					</c:forEach>
