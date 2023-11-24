@@ -1,7 +1,7 @@
 <%@page import="Enrol.EnrolDTO"%>
 <%@page import="Enrol.EnrolDAO"%>
-<%@page import="Lecture.ClassDTO"%>
-<%@page import="Lecture.ClassDAO"%>
+<%@page import="Lecture.LectureDTO"%>
+<%@page import="Lecture.LectureDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>

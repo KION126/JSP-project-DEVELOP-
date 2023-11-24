@@ -30,8 +30,8 @@ public class LectureSearch implements CommandHandler{
 		keyword = request.getParameter("keyword");
 		
 		// keyword로 강의 리스트 가져오기
-		ClassDAO dao = new ClassDAO();
-	    List<ClassDTO> classInfoList = dao.searchClassesByKeyword(keyword);
+		LectureDAO dao = new LectureDAO();
+	    List<LectureDTO> classInfoList = dao.searchClassesByKeyword(keyword);
 		
 	    request.setAttribute("userID", userID);
 		request.setAttribute("classInfoList", classInfoList);

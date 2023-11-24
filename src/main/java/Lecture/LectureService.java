@@ -12,8 +12,8 @@ import Board.BoardDAO;
 import Board.BoardDTO;
 import CommandHandler.CommandHandler;
 import Enrol.EnrolDAO;
-import Lecture.ClassDAO;
-import Lecture.ClassDTO;
+import Lecture.LectureDAO;
+import Lecture.LectureDTO;
 import User.UserDAO;
 
 public class LectureService implements CommandHandler {
@@ -58,8 +58,8 @@ public class LectureService implements CommandHandler {
     
     private String lectureInfo(HttpServletRequest request, String userID, int classID) {
     	// 해당 강좌의 정보 가져오기
-        ClassDAO class_dao = new ClassDAO();
-        ClassDTO classInfos = class_dao.getClassInfo(classID);
+        LectureDAO class_dao = new LectureDAO();
+        LectureDTO classInfos = class_dao.getClassInfo(classID);
 
         // 강좌 정보 전달
         request.setAttribute("userID", userID);
@@ -91,8 +91,8 @@ public class LectureService implements CommandHandler {
         enrol_dao.enrolClass(userID, classID);
 
         // 해당 강좌의 정보 가져오기
-        ClassDAO class_dao = new ClassDAO();
-        ClassDTO classInfos = class_dao.getClassInfo(classID);
+        LectureDAO class_dao = new LectureDAO();
+        LectureDTO classInfos = class_dao.getClassInfo(classID);
 
         // 해당 강좌를 수강중인지 확인여부 전달
         boolean classEnrolChecked = enrol_dao.classEnrolCheck(userID, classID);
@@ -124,11 +124,11 @@ public class LectureService implements CommandHandler {
 		String userType = DAO.getUserType(userID);
         
         // lecture 정보 가져오기
-        ClassDAO class_dao = new ClassDAO();
-		List<ClassDTO> classInfos = class_dao.getClassInfos(classID);
+        LectureDAO class_dao = new LectureDAO();
+		List<LectureDTO> classInfos = class_dao.getClassInfos(classID);
 		String lec_title = null;
 		String lec_pro = null;
-		for (ClassDTO classInfo : classInfos) {
+		for (LectureDTO classInfo : classInfos) {
 			lec_title = classInfo.getClassTitle();
 			lec_pro = classInfo.getClassProfessor();
 		}

@@ -1,6 +1,6 @@
 package Lecture;
 
-public class ClassDTO {
+public class LectureDTO {
 	private int classID;
 	private String classThema;
 	private String classTitle;
@@ -10,7 +10,7 @@ public class ClassDTO {
 	private int classVideoNum;
 	private int classPersonnel;
 	
-	public ClassDTO(int classID, String classThema, String classTitle, String classProfessor, String classContent, String classImg, int classVideoNum, int classPersonnel) {
+	public LectureDTO(int classID, String classThema, String classTitle, String classProfessor, String classContent, String classImg, int classVideoNum, int classPersonnel) {
 		super();
 		this.classID = classID;
 		this.classThema = classThema;
@@ -21,27 +21,27 @@ public class ClassDTO {
 		this.classVideoNum = classVideoNum;
 		this.classPersonnel = classPersonnel;
 	}
-	public ClassDTO(int classID, String classImg, String classTitle, String classProfessor, int classPersonnel) {
+	public LectureDTO(int classID, String classImg, String classTitle, String classProfessor, int classPersonnel) {
         this.classID = classID;
         this.classImg = classImg;
         this.classTitle = classTitle;
         this.classProfessor = classProfessor;
         this.classPersonnel = classPersonnel;
     }
-	public ClassDTO(String classImg, String classTitle, String classProfessor, int classVideoNum) {
+	public LectureDTO(String classImg, String classTitle, String classProfessor, int classVideoNum) {
         this.classImg = classImg;
         this.classTitle = classTitle;
         this.classProfessor = classProfessor;
         this.classVideoNum = classVideoNum;
     }
-	public ClassDTO(int classID, String classImg, String classTitle, String classThema,String classProfessor) {
+	public LectureDTO(int classID, String classImg, String classTitle, String classThema,String classProfessor) {
 		this.classID = classID;
 		this.classImg = classImg;
         this.classTitle = classTitle;
         this.classProfessor = classProfessor;
         this.classThema = classThema;
     }
-	public ClassDTO() {
+	public LectureDTO() {
     }
 	public int getClassID() {
 		return classID;

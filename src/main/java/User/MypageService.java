@@ -1,4 +1,4 @@
-package MyPage;
+package User;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,9 +12,8 @@ import javax.servlet.http.HttpSession;
 import CommandHandler.CommandHandler;
 import Enrol.EnrolDAO;
 import Enrol.EnrolDTO;
-import Lecture.ClassDAO;
-import Lecture.ClassDTO;
-import User.UserDAO;
+import Lecture.LectureDAO;
+import Lecture.LectureDTO;
 
 public class MypageService implements CommandHandler{
 
@@ -46,10 +45,10 @@ public class MypageService implements CommandHandler{
 		List<EnrolDTO> myClassIDs = enrol_dao.getMyClassID(userID);
 		
 		// classID로 강의 정보 가져오기
-		ClassDAO class_dao = new ClassDAO();
-		List<List<ClassDTO>> myClassInfosList = new ArrayList<>();
+		LectureDAO class_dao = new LectureDAO();
+		List<List<LectureDTO>> myClassInfosList = new ArrayList<>();
 		for (EnrolDTO myClassID : myClassIDs) {
-		    List<ClassDTO> myClassInfos = class_dao.getClassInfos(myClassID.getClassID());
+		    List<LectureDTO> myClassInfos = class_dao.getClassInfos(myClassID.getClassID());
 		    myClassInfosList.add(myClassInfos);
 		}
 		

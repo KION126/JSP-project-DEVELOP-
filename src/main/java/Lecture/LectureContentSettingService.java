@@ -32,11 +32,11 @@ public class LectureContentSettingService implements CommandHandler {
         }
         
 		// lecture 정보 가져오기
-        ClassDAO class_dao = new ClassDAO();
-		List<ClassDTO> classInfos = class_dao.getClassInfos(classID);
+        LectureDAO class_dao = new LectureDAO();
+		List<LectureDTO> classInfos = class_dao.getClassInfos(classID);
 		String lec_title = null;
 		String lec_pro = null;
-		for (ClassDTO classInfo : classInfos) {
+		for (LectureDTO classInfo : classInfos) {
 			lec_title = classInfo.getClassTitle();
 			lec_pro = classInfo.getClassProfessor();
 		}

@@ -1,4 +1,4 @@
-package LectureRoomNoticeControl;
+package LectureRoomNoticeService;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,8 +16,8 @@ import javax.servlet.http.HttpSession;
 import Board.BoardDAO;
 import Board.BoardDTO;
 import CommandHandler.CommandHandler;
-import Lecture.ClassDAO;
-import Lecture.ClassDTO;
+import Lecture.LectureDAO;
+import Lecture.LectureDTO;
 import User.UserDAO;
 
 public class LectureRoomBoardDownload implements CommandHandler {
@@ -47,11 +47,11 @@ public class LectureRoomBoardDownload implements CommandHandler {
 		String userType = DAO.getUserType(userID);
         
         // lecture 정보 가져오기
-        ClassDAO class_dao = new ClassDAO();
-		List<ClassDTO> classInfos = class_dao.getClassInfos(classID);
+        LectureDAO class_dao = new LectureDAO();
+		List<LectureDTO> classInfos = class_dao.getClassInfos(classID);
 		String lec_title = null;
 		String lec_pro = null;
-		for (ClassDTO classInfo : classInfos) {
+		for (LectureDTO classInfo : classInfos) {
 			lec_title = classInfo.getClassTitle();
 			lec_pro = classInfo.getClassProfessor();
 		}

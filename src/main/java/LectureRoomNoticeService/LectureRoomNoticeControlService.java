@@ -1,4 +1,4 @@
-package LectureRoomNoticeControl;
+package LectureRoomNoticeService;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,8 +17,8 @@ import Board.BoardDTO;
 import CommandHandler.CommandHandler;
 import Comment.CommentDAO;
 import Enrol.EnrolDAO;
-import Lecture.ClassDAO;
-import Lecture.ClassDTO;
+import Lecture.LectureDAO;
+import Lecture.LectureDTO;
 import User.UserDAO;
 
 public class LectureRoomNoticeControlService implements CommandHandler {
@@ -101,11 +101,11 @@ public class LectureRoomNoticeControlService implements CommandHandler {
 		String userType = DAO.getUserType(userID);
         
         // lecture 정보 가져오기
-        ClassDAO class_dao = new ClassDAO();
-		List<ClassDTO> classInfos = class_dao.getClassInfos(classID);
+        LectureDAO class_dao = new LectureDAO();
+		List<LectureDTO> classInfos = class_dao.getClassInfos(classID);
 		String lec_title = null;
 		String lec_pro = null;
-		for (ClassDTO classInfo : classInfos) {
+		for (LectureDTO classInfo : classInfos) {
 			lec_title = classInfo.getClassTitle();
 			lec_pro = classInfo.getClassProfessor();
 		}
@@ -173,11 +173,11 @@ public class LectureRoomNoticeControlService implements CommandHandler {
 		String userType = DAO.getUserType(userID);
 		
 		// lecture 정보 가져오기
-        ClassDAO class_dao = new ClassDAO();
-		List<ClassDTO> classInfos = class_dao.getClassInfos(classID);
+        LectureDAO class_dao = new LectureDAO();
+		List<LectureDTO> classInfos = class_dao.getClassInfos(classID);
 		String lec_title = null;
 		String lec_pro = null;
-		for (ClassDTO classInfo : classInfos) {
+		for (LectureDTO classInfo : classInfos) {
 			lec_title = classInfo.getClassTitle();
 			lec_pro = classInfo.getClassProfessor();
 		}
@@ -281,11 +281,11 @@ public class LectureRoomNoticeControlService implements CommandHandler {
 		String userType = DAO.getUserType(userID);
 		
 		// lecture 정보 가져오기
-        ClassDAO class_dao = new ClassDAO();
-		List<ClassDTO> classInfos = class_dao.getClassInfos(classID);
+        LectureDAO class_dao = new LectureDAO();
+		List<LectureDTO> classInfos = class_dao.getClassInfos(classID);
 		String lec_title = null;
 		String lec_pro = null;
-		for (ClassDTO classInfo : classInfos) {
+		for (LectureDTO classInfo : classInfos) {
 			lec_title = classInfo.getClassTitle();
 			lec_pro = classInfo.getClassProfessor();
 		}
@@ -333,11 +333,11 @@ public class LectureRoomNoticeControlService implements CommandHandler {
 		String userType = DAO.getUserType(userID);
 		
 		// lecture 정보 가져오기
-        ClassDAO class_dao = new ClassDAO();
-		List<ClassDTO> classInfos = class_dao.getClassInfos(classID);
+        LectureDAO class_dao = new LectureDAO();
+		List<LectureDTO> classInfos = class_dao.getClassInfos(classID);
 		String lec_title = null;
 		String lec_pro = null;
-		for (ClassDTO classInfo : classInfos) {
+		for (LectureDTO classInfo : classInfos) {
 			lec_title = classInfo.getClassTitle();
 			lec_pro = classInfo.getClassProfessor();
 		}

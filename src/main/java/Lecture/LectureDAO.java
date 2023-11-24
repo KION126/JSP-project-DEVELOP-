@@ -8,9 +8,9 @@ import java.util.List;
 
 import util.DatabaseUtill;
 
-public class ClassDAO {
-	public List<ClassDTO> getTop6Classes() {
-        List<ClassDTO> top6Classes = new ArrayList<>();
+public class LectureDAO {
+	public List<LectureDTO> getTop6Classes() {
+        List<LectureDTO> top6Classes = new ArrayList<>();
         String sql = "SELECT classID, classImg, classTitle, classProfessor, classPersonnel FROM class " +
                      "WHERE classPersonnel IS NOT NULL ORDER BY classPersonnel DESC LIMIT 6";
         Connection conn = null;
@@ -22,7 +22,7 @@ public class ClassDAO {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                ClassDTO classInfo = new ClassDTO(
+                LectureDTO classInfo = new LectureDTO(
                     rs.getInt("classID"),
                     rs.getString("classImg"),
                     rs.getString("classTitle"),
@@ -42,8 +42,8 @@ public class ClassDAO {
 
         return top6Classes;
     }
-	public ClassDTO getClassInfo(int classID) {
-	    ClassDTO myClassInfo = null;
+	public LectureDTO getClassInfo(int classID) {
+	    LectureDTO myClassInfo = null;
 	    String sql = "SELECT * FROM class WHERE classID = ?";
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
@@ -56,7 +56,7 @@ public class ClassDAO {
 	        rs = pstmt.executeQuery();
 
 	        if (rs.next()) {
-	            myClassInfo = new ClassDTO(
+	            myClassInfo = new LectureDTO(
 	                rs.getInt("classID"),
 	                rs.getString("classThema"),
 	                rs.getString("classTitle"),
@@ -78,8 +78,8 @@ public class ClassDAO {
 	    return myClassInfo;
 	}
 	
-	public List<ClassDTO> getClassInfos(int classID) {
-        List<ClassDTO> myClassInfo = new ArrayList<>();
+	public List<LectureDTO> getClassInfos(int classID) {
+        List<LectureDTO> myClassInfo = new ArrayList<>();
         String sql = "SELECT * FROM class WHERE classID = ?";
         Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -91,7 +91,7 @@ public class ClassDAO {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-            	ClassDTO classInfo = new ClassDTO(
+            	LectureDTO classInfo = new LectureDTO(
             		rs.getInt("classID"),
             		rs.getString("classThema"),
                     rs.getString("classTitle"),
@@ -114,8 +114,8 @@ public class ClassDAO {
         return myClassInfo;
     }
 	
-	public List<ClassDTO> searchClassesByKeyword(String keyword) {
-        List<ClassDTO> classes = new ArrayList<>();
+	public List<LectureDTO> searchClassesByKeyword(String keyword) {
+        List<LectureDTO> classes = new ArrayList<>();
         String sql = "SELECT * FROM class WHERE classTitle LIKE ? OR ClassThema LIKE ?";
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -130,7 +130,7 @@ public class ClassDAO {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-            	ClassDTO classInfo = new ClassDTO(
+            	LectureDTO classInfo = new LectureDTO(
             		rs.getInt("classID"),
                     rs.getString("classImg"),
                     rs.getString("classTitle"),

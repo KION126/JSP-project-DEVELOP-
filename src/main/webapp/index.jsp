@@ -1,5 +1,5 @@
-<%@page import="Lecture.ClassDTO"%>
-<%@page import="Lecture.ClassDAO"%>
+<%@page import="Lecture.LectureDTO"%>
+<%@page import="Lecture.LectureDAO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -80,25 +80,24 @@
 	<div class="recommendation-container">
 		<h3 style="text-align: left;">인기강좌 TOP6</h3>
 		<div class="row">
-			<%
-			ClassDAO dao = new ClassDAO();
-		    // 상위 6개의 클래스 정보 가져오기
-		    List<ClassDTO> top6Classes = dao.getTop6Classes();
-			int i = 0;
-            for (ClassDTO classInfo : top6Classes) {
-            	i++;
-                String cardClass;
-                String topImg;
-                if(i==1){
-                	cardClass = "classCard_1st";
-                	topImg = "1st";
-                } else if(i==2){
-                	cardClass = "classCard_2nd";
-                	topImg = "2nd";
-                } else{
-                	cardClass = "classCard_another";
-                	topImg = "null";
-                }
+			<%		LectureDAO dao = new LectureDAO();
+						    // 상위 6개의 클래스 정보 가져오기
+						    List<LectureDTO> top6Classes = dao.getTop6Classes();
+					int i = 0;
+				            for (LectureDTO classInfo : top6Classes) {
+				            	i++;
+				                String cardClass;
+				                String topImg;
+				                if(i==1){
+				                	cardClass = "classCard_1st";
+				                	topImg = "1st";
+				                } else if(i==2){
+				                	cardClass = "classCard_2nd";
+				                	topImg = "2nd";
+				                } else{
+				                	cardClass = "classCard_another";
+				                	topImg = "null";
+				                }
 			%>
 			<div class="card <%=cardClass %>" onclick="lectureInfo(<%=classInfo.getClassID()%>)">
 				<img src="./image/<%=topImg %>.png" style="height: 100px; width: 100px; position: absolute; float: left;">
