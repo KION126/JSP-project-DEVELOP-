@@ -5,19 +5,61 @@ public class LectureContentDTO {
 	int lectureID;
 	int week;
 	String title;
-	String date;
-	String video;
 	String file;
 	String realFile;
+	String startDate;
+	String endDate;
 	
-	public LectureContentDTO(int week, String title, String date, String video, String file, String realFile) {
+	public LectureContentDTO(int contentID, int lectureID, int week, String title, String file, String realFile, String startDate, String endDate) {
+		super();
+		this.contentID = contentID;
+		this.lectureID = lectureID;
+		this.week = week;
+		this.title = title;
+		this.file = file;
+		this.realFile = realFile;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+	
+	public LectureContentDTO(int lectureID, int week, String title, String file, String realFile, String startDate, String endDate) {
+		super();
+		this.lectureID = lectureID;
+		this.week = week;
+		this.title = title;
+		this.file = file;
+		this.realFile = realFile;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+
+	public LectureContentDTO(int week, String title, String file, String realFile, String startDate, String endDate) {
 		super();
 		this.week = week;
 		this.title = title;
-		this.date = date;
-		this.video = video;
 		this.file = file;
 		this.realFile = realFile;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+
+	public String getFile() {
+		return file;
+	}
+	public void setFile(String file) {
+		this.file = file;
+	}
+	public String getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+	public String getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 	public int getContentID() {
 		return contentID;
@@ -42,24 +84,6 @@ public class LectureContentDTO {
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public String getVideo() {
-		return video;
-	}
-	public void setVideo(String video) {
-		this.video = video;
-	}
-	public String getFile() {
-		return file;
-	}
-	public void setFile(String file) {
-		this.file = file;
 	}
 	public String getRealFile() {
 		return realFile;

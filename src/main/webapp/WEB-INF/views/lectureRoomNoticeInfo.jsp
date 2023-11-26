@@ -31,10 +31,19 @@
 		<%@ include file="layout/lectureRoomSideBar.jsp" %>
 		<div class="col-8 classRoom-main-container">
 			<a href="javascript:lectureRoom(${classID})">강의실 홈</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
-			<a href="javascript:lectureRoomNotice(${classID }, 1)">강의 공지</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
+			<c:choose>
+				<c:when test="${boardType == 1 }">
+					<a href="javascript:lectureRoomNotice(${classID }, 1, 1)">강의 공지</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
+					<c:set var="boadTitle" value="강의 공지" />
+				</c:when>
+				<c:otherwise>
+					<a href="javascript:lectureRoomNotice(${classID }, 1, 2)">Q & A</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
+					<c:set var="boadTitle" value="Q & A" />
+				</c:otherwise>
+			</c:choose>
 			<a style="font-weight: bold;" href="javascript:lectureRoomNoticeInfo(${classID }, ${boardID })">${not_Title }</a>
 			<div class="classRoom-notice" style="height: 600px;">
-				<h3 style="font-weight: bold; text-align: center;">강의 공지</h3>
+				<h3 style="font-weight: bold; text-align: center;">${boadTitle }</h3>
 				<table class="noticeInfo-table">
 					<thead>
 						<tr>
@@ -56,8 +65,11 @@
 					</tbody>
 				</table>
 				<c:if test="${userIDeqboardID}">
-					<button class="btn-notice-delete" onclick="lectureRoomNoticeDeleteAction(${classID }, ${boardID })">삭제</button>
-					<button class="btn-notice-modify" onclick="lectureRoomNoticeModifyConfirm(${classID }, ${boardID })">수정</button>
+					<button class="btn-notice-delete" onclick="lectureRoomNoticeDeleteAction(${classID }, ${boardID }, ${boardType })">삭제</button>
+					<button class="btn-notice-modify" onclick="lectureRoomNoticeModifyConfirm(${classID }, ${boardID }, ${boardType })">수정</button>
+				</c:if>
+				<c:if test="${userType eq lectuerType }">
+					<button class="btn-notice-delete" onclick="lectureRoomNoticeDeleteAction(${classID }, ${boardID }, ${boardType })">삭제</button>
 				</c:if>
 			</div>
 			<c:if test="${commentInfoList.size() > 0 }">

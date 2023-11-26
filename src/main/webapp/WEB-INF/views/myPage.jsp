@@ -29,11 +29,14 @@
                 <h2 style="font-weight: bold">마이페이지</h2>
                 <br>
                 <ul class="menus">
-                    <li class="menu-item menu-item-01 active"><a href="myClassRoom.jsp" style="font-size: 15px"> <img src="./image/icon/myClassRoom.png" style="height: 25px; margin-right: 10px;">내강의실
+                    <li class="menu-item menu-item-01 active"><a href="myPage.do" style="font-size: 15px">
+                    <img src="./image/icon/myClassRoom.png" style="height: 25px; margin-right: 10px;">내강의실
                     </a></li>
-                    <li class="menu-item menu-item-02"><a href="myInterest.jsp" style="font-size: 15px"> <img src="./image/icon/myInterest.png" style="height: 25px; margin-right: 10px;">관심분야설정
+                    <li class="menu-item menu-item-02"><a href="myInterest.do" style="font-size: 15px">
+                    <img src="./image/icon/myInterest.png" style="height: 25px; margin-right: 10px;">관심분야설정
                     </a></li>
-                    <li class="menu-item menu-item-03"><a href="myUserEdit.jsp" style="font-size: 15px"> <img src="./image/icon/myUserEdit.png" style="height: 25px; margin-right: 10px;">개인정보관리
+                    <li class="menu-item menu-item-03"><a href="myUserEdit.do" style="font-size: 15px">
+                    <img src="./image/icon/myUserEdit.png" style="height: 25px; margin-right: 10px;">개인정보관리
                     </a></li>
                 </ul>
             </div>

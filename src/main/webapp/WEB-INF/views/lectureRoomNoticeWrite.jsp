@@ -31,10 +31,19 @@
         <%@ include file="layout/lectureRoomSideBar.jsp" %>
         <div class="col-8 classRoom-main-container">
             <a href="javascript:lectureRoom(${classID})">강의실 홈</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
-            <a href="javascript:lectureRoomNotice(${classID }, 1)">강의 공지</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
-            <a style="font-weight: bold;" href="javascript:lectureRoomNoticeWrite(${classID })">강의 공지 글쓰기</a>
+            <c:choose>
+				<c:when test="${boardType == 1 }">
+					<a href="javascript:lectureRoomNotice(${classID }, 1, 1)">강의 공지</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
+					<c:set var="boadTitle" value="강의 공지 글쓰기" />
+				</c:when>
+				<c:otherwise>
+					<a href="javascript:lectureRoomNotice(${classID }, 1, 2)">Q & A</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
+					<c:set var="boadTitle" value="Q & A 글쓰기" />
+				</c:otherwise>
+			</c:choose>
+			<a style="font-weight: bold;">${boadTitle }</a>
             <div class="classRoom-notice" style="height: 700px;">
-                <h3 style="font-weight: bold; text-align: center;">강의 공지</h3>
+                <h3 style="font-weight: bold; text-align: center;">${boadTitle }</h3>
 					<form action="
 					<c:choose>
 						<c:when test='${boardID > 0}'>lectureRoomNoticeModifyAction.do</c:when>
@@ -70,6 +79,7 @@
                     <input type="hidden" name="boardID" value="${boardID}">
                     <input type="hidden" name="userID" value="${userID}">
                     <input type="hidden" name="classID" value="${classID}">
+                    <input type="hidden" name="boardType" value="${boardType}">
                     <input class="btn-notice-write" type="submit" <c:choose><c:when test='${boardID > 0}'>value="수정"</c:when><c:otherwise>value="작성"</c:otherwise></c:choose>>
                 </form>
                     <button class="btn-notice-modefy-cancle" onclick="javascript:lectureRoomNotice(${classID }, 1)">취소</button>

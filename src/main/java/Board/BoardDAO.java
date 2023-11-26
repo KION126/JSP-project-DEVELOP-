@@ -176,6 +176,7 @@ public class BoardDAO {
 
 	        if (rs.next()) {
 	            BoardDTO noticeInfo = new BoardDTO(
+	            	rs.getInt("boardType"),
 	            	rs.getString("userID"),
 	                rs.getString("boardDate"),
 	                rs.getString("boardTitle"),

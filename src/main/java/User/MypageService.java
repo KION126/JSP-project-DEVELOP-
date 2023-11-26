@@ -16,15 +16,12 @@ import Lecture.LectureDAO;
 import Lecture.LectureDTO;
 
 public class MypageService implements CommandHandler{
+	String viewPage = null;
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		
-		// 마이페이지 이동
-		// userID, userEmail, userName, userType 전달
-		// 수강중인 강의 리스트 전달
 		
 		String userID = null;
 		
@@ -32,13 +29,37 @@ public class MypageService implements CommandHandler{
 		if(session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
 		}
-		System.out.println(session.getAttribute("userID"));
-		System.out.println(userID);
+		
+		String requestPage = request.getRequestURI().replaceAll("/JSP_DEVELOP/","");
+		
+		switch (requestPage) {
+			case "myPage.do": {
+				viewPage = myPage(request, userID);		// 마이페이지 이동
+				break;
+			} case "myInterest.do" : {
+				viewPage = myInterest(request);		// 관심분야설정 페이지 이동
+				break;
+			} case "myUserEdit.do" : {
+				viewPage = myUserEdit(request);		// 게인정보관리 페이지 이동
+				break;
+			}
+		}
+			
 		// userID로 사용자 정보 가져오기
 		UserDAO DAO = new UserDAO();
 		String userEmail = DAO.getUserEmail(userID);
 		String userName = DAO.getUserName(userID);
 		String userType = DAO.getUserType(userID);
+
+		request.setAttribute("userID", userID);
+		request.setAttribute("userEmail", userEmail);
+		request.setAttribute("userName", userName);
+		request.setAttribute("userType", userType);
+		
+		return viewPage;
+	}
+		
+	private String myPage(HttpServletRequest request, String userID) {
 		
 		// 회원이 수강중인 강의들의 classID 가져오기
 		EnrolDAO enrol_dao = new EnrolDAO();
@@ -52,12 +73,18 @@ public class MypageService implements CommandHandler{
 		    myClassInfosList.add(myClassInfos);
 		}
 		
-		request.setAttribute("userID", userID);
-		request.setAttribute("userEmail", userEmail);
-		request.setAttribute("userName", userName);
-		request.setAttribute("userType", userType);
 		request.setAttribute("myClassInfosList", myClassInfosList);
-
+		
 		return "myPage";
+	}
+	
+	private String myInterest(HttpServletRequest request) {
+		
+		return "myInterest";
+	}
+	
+	private String myUserEdit(HttpServletRequest request) {
+		
+		return "myUserEdit";
 	}
 }

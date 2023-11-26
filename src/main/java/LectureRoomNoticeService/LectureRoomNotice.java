@@ -59,6 +59,12 @@ public class LectureRoomNotice implements CommandHandler {
     }
     
     private String lectureRoomNotice(HttpServletRequest request, String userID, int classID) {
+    	int boardType = 0;
+    	
+    	if(request.getParameter("boardType") != null) {
+    		boardType = Integer.parseInt(request.getParameter("boardType"));
+    	}
+    	
     	// userType가져오기
         UserDAO DAO = new UserDAO();
 		String userType = DAO.getUserType(userID);
@@ -83,7 +89,7 @@ public class LectureRoomNotice implements CommandHandler {
 		
 		int startRow = (currentPage - 1) * recordsPerPage;		
 		BoardDAO notice_dao = new BoardDAO();
-		List<BoardDTO> noticeInfoList = notice_dao.getLists(1, classID, startRow, recordsPerPage);
+		List<BoardDTO> noticeInfoList = notice_dao.getLists(boardType, classID, startRow, recordsPerPage);
 		
 		for (BoardDTO noticeInfo : noticeInfoList) {
             String userName = DAO.getUserName(noticeInfo.getUserID());
@@ -91,7 +97,7 @@ public class LectureRoomNotice implements CommandHandler {
         }
 		
 		// 페이징 처리를 위한 전체 공지사항 수 조회
-		int totalRecords = notice_dao.getTotalRecords(1, classID);
+		int totalRecords = notice_dao.getTotalRecords(boardType, classID);
 		int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
 
 		request.setAttribute("userID", userID);
@@ -105,17 +111,18 @@ public class LectureRoomNotice implements CommandHandler {
         request.setAttribute("noticeInfoList", noticeInfoList);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("totalPages", totalPages);
+        request.setAttribute("boardType", boardType);
         
         return "lectureRoomNotice";
     }
     
     private String lectureRoomNoticeInfo(HttpServletRequest request, String userID, int classID) {
     	int boardID = 0;
-        
-        if(Integer.parseInt(request.getParameter("boardID")) > 0) {
-        	boardID = Integer.parseInt(request.getParameter("boardID"));
-        }
 
+    	if(request.getParameter("boardID") != null) {
+    		boardID = Integer.parseInt(request.getParameter("boardID"));
+    	}
+    	
         // userType가져오기
         UserDAO DAO = new UserDAO();
     	String userType = DAO.getUserType(userID);
@@ -142,15 +149,17 @@ public class LectureRoomNotice implements CommandHandler {
     	String not_Con = null;
     	String not_File = null;
     	int not_Hit = 0;
+    	int boardType = 0;
     	
     	for (BoardDTO noticeInfo : noticeInfoList) {
-            not_Title = noticeInfo.getboardTitle();
+    		boardType = noticeInfo.getBoardType();
     		not_userID = noticeInfo.getUserID();
-    		not_userName = DAO.getUserName(not_userID);
     		not_Date = noticeInfo.getboardDate();
+            not_Title = noticeInfo.getboardTitle();
     		not_Con = noticeInfo.getboardContent();
     		not_File = noticeInfo.getboardFile();
     		not_Hit = noticeInfo.getboardHit();
+    		not_userName = DAO.getUserName(not_userID);
         }
     	
     	boolean userIDeqboardID = false;
@@ -178,6 +187,7 @@ public class LectureRoomNotice implements CommandHandler {
         request.setAttribute("classID", classID);
         request.setAttribute("userType", userType);
         request.setAttribute("userIDeqboardID", userIDeqboardID);
+        request.setAttribute("lectuerType", "lecture"+Integer.toString(classID));
     	
         request.setAttribute("lec_title", lec_title);
         request.setAttribute("lec_pro", lec_pro);
@@ -193,6 +203,7 @@ public class LectureRoomNotice implements CommandHandler {
         request.setAttribute("commentInfoList", commentInfoList);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("totalPages", totalPages);
+        request.setAttribute("boardType", boardType);
         
         return "lectureRoomNoticeInfo";
 	}
@@ -200,6 +211,11 @@ public class LectureRoomNotice implements CommandHandler {
     private String lectureRoomNoticeSearch(HttpServletRequest request, String userID, int classID) {
     	String searchOption = null;
         String searchKeyword = null;
+        int boardType = 0;
+    	
+    	if(request.getParameter("boardType") != null) {
+    		boardType = Integer.parseInt(request.getParameter("boardType"));
+    	}
         
         if(request.getParameter("searchOption") != null || request.getParameter("searchOption") != "") {
         	searchOption = request.getParameter("searchOption");
@@ -233,7 +249,7 @@ public class LectureRoomNotice implements CommandHandler {
 		int startRow = (currentPage - 1) * recordsPerPage;	
 
 		BoardDAO notice_dao = new BoardDAO();	
-		List<BoardDTO> noticeInfoList = notice_dao.searchNotices(1, classID, searchOption, searchKeyword, startRow, recordsPerPage);
+		List<BoardDTO> noticeInfoList = notice_dao.searchNotices(boardType, classID, searchOption, searchKeyword, startRow, recordsPerPage);
 		
 		for (BoardDTO noticeInfo : noticeInfoList) {
             String userName = DAO.getUserName(noticeInfo.getUserID());
@@ -247,6 +263,7 @@ public class LectureRoomNotice implements CommandHandler {
 		request.setAttribute("userID", userID);
         request.setAttribute("classID", classID);
         request.setAttribute("userType", userType);
+        request.setAttribute("lectuerType", "lecture"+Integer.toString(classID));
 		
         request.setAttribute("lec_title", lec_title);
         request.setAttribute("lec_pro", lec_pro);
@@ -256,6 +273,8 @@ public class LectureRoomNotice implements CommandHandler {
         request.setAttribute("totalPages", totalPages);
         request.setAttribute("searchOption", searchOption);
         request.setAttribute("searchKeyword", searchKeyword);
+        
+        request.setAttribute("boardType", boardType);
         
         return "lectureRoomNoticeSearch";
     }

@@ -22,8 +22,9 @@ public class BoardDTO {
 		this.boardHit = boardHit;
 	}
 	
-	public BoardDTO(String userID, String boardDate, String boardTitle, String boardContent, int boardHit, String boardFile, String boardRealFile) {
+	public BoardDTO(int boardType, String userID, String boardDate, String boardTitle, String boardContent, int boardHit, String boardFile, String boardRealFile) {
 		super();
+		this.boardType = boardType;
 		this.userID = userID;
 		this.boardDate = boardDate;
 		this.boardTitle = boardTitle;

@@ -31,34 +31,13 @@
 		<%@ include file="layout/lectureRoomSideBar.jsp" %>
 		<div class="col-8 classRoom-main-container">
 			<a href="javascript:lectureRoom(${classID})">강의실 홈</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
-			<a style="font-weight: bold;" href="javascript:lectureRoomNotice(${classID }, 1)">강의 관리</a>
+			<a style="font-weight: bold;" >강의 영상 시청</a>
 			<div class="classRoom-notice" style="height: 700px;">
-				<h3 style="font-weight: bold; text-align: center;">강의 관리</h3>
-				<button type="button" class="btn-notice-write" onclick="lectureContentWrite(${classID })">강의 추가</button>
-				
-				<c:forEach var="lecConInfo" items="${lecConInfoList}">
-					<table class="lectureContent-table">
-					<thead>
-						<tr>
-							<th class="noticeInfo-head-th" scope="col">${lecConInfo.title}</th>
-						</tr>
-						<tr class="noticeInfo-tr">
-							<th class="noticeInfo-th">강의영상:
-							<a href="javascript:lectureRoomBoardDownload(${classID }, ${boardID })">${not_File }</a></th>
-						</tr>
-						<tr class="noticeInfo-tr">
-							<th class="noticeInfo-th">첨부파일:
-							<a href="javascript:lectureRoomBoardDownload(${classID }, ${boardID })">${lecConInfo.file}</a></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="noticeInfo-tr">
-							<th class="noticeInfo-con-th">${not_Con }</th>
-						</tr>
-					</tbody>
-				</table>
-				</c:forEach>
-				
+			<h3 style="text-align: left; font-weight: bold;">${contentTitle }</h3>
+			<h3 style="text-align: left; font-size: 20px;">${videoTitle }</h3>
+				<video class="videoPlayer" width="800px" height="450px" controls>
+					<source src="${videoURL}"></source>
+				</video>
 			</div>
 		</div>
 	</div>
@@ -78,6 +57,9 @@
 	<!-- lectureRoomNotice.js 추가 -->
 	<script src="./js/lectureRoomNotice.js" /></script>
 	<!-- lectureContentWrite.js 추가 -->
+	<script src="./js/lectureContentSetting.js" /></script>
+	<!-- lectureContentWrite.js 추가 -->
 	<script src="./js/lectureContentWrite.js" /></script>
+
 </body>
 </html>

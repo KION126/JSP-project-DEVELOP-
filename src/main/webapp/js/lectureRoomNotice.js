@@ -1,4 +1,4 @@
-function lectureRoomNotice(classID, currentPage) {
+function lectureRoomNotice(classID, currentPage, boardType) {
 		// 동적으로 form 생성
 	    var form = document.createElement('form');
 	    form.method = 'post';
@@ -17,6 +17,13 @@ function lectureRoomNotice(classID, currentPage) {
 	    currentPageInput.name = 'currentPage';
 	    currentPageInput.value = currentPage;
 	    form.appendChild(currentPageInput);
+	    
+	    // boardType를 전달하는 hidden input 추가
+	    var boardTypeInput = document.createElement('input');
+	    boardTypeInput.type = 'hidden';
+	    boardTypeInput.name = 'boardType';
+	    boardTypeInput.value = boardType;
+	    form.appendChild(boardTypeInput);
 
 	    // form을 문서에 추가하고 submit
 	    document.body.appendChild(form);

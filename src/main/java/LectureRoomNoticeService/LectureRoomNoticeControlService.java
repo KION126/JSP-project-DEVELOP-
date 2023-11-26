@@ -76,25 +76,19 @@ public class LectureRoomNoticeControlService implements CommandHandler {
 		String boardTitle = null;
         String boardContent = null;
         String boardFile = null;
+        int boardType = 0;
+    	
+    	if(request.getParameter("boardType") != null) {
+    		boardType = Integer.parseInt(request.getParameter("boardType"));
+    	}
         
-        if(request.getParameter("userID") != null || request.getParameter("userID") != "") {
-        	userID = request.getParameter("userID");
-        }
-        
-        if(Integer.parseInt(request.getParameter("classID")) > 0) {
-        	classID = Integer.parseInt(request.getParameter("classID"));
-        }
-        
-        if(request.getParameter("boardID") != null) {
-        	boardID = Integer.parseInt(request.getParameter("boardID"));
-        	BoardDAO notice_dao = new BoardDAO();
-    		List<BoardDTO> noticeInfoList = notice_dao.getDate(boardID);
-    		for (BoardDTO noticeInfo : noticeInfoList) {
-    			boardTitle = noticeInfo.getboardTitle();
-    			boardContent = noticeInfo.getboardContent();
-    			boardFile = noticeInfo.getboardFile();
-            }
-        }
+    	BoardDAO notice_dao = new BoardDAO();
+		List<BoardDTO> noticeInfoList = notice_dao.getDate(boardID);
+		for (BoardDTO noticeInfo : noticeInfoList) {
+			boardTitle = noticeInfo.getboardTitle();
+			boardContent = noticeInfo.getboardContent();
+			boardFile = noticeInfo.getboardFile();
+		}
         
         // userType가져오기
         UserDAO DAO = new UserDAO();
@@ -121,6 +115,8 @@ public class LectureRoomNoticeControlService implements CommandHandler {
         request.setAttribute("boardTitle", boardTitle);
         request.setAttribute("boardContent", boardContent);
         request.setAttribute("boardFile", boardFile);
+        System.out.println(boardType);
+        request.setAttribute("boardType", boardType);
         
         return "lectureRoomNoticeWrite";
     }
@@ -130,8 +126,10 @@ public class LectureRoomNoticeControlService implements CommandHandler {
         String boardContent = null;
         String boardFile = null;
         String boardRealFile = null;
+        int boardType = 0;
 
         String savepath = request.getRealPath("/upload").replace("\\\\", "/");
+        System.out.println(savepath);
         File uploadDir = new File(savepath);
         if (!uploadDir.exists()) {
             uploadDir.mkdirs(); // 디렉토리가 없으면 만듭니다
@@ -167,6 +165,9 @@ public class LectureRoomNoticeControlService implements CommandHandler {
         if(multi.getParameter("boardContent") != null || multi.getParameter("boardContent") != "") {
         	boardContent = multi.getParameter("boardContent");
         }
+        if(multi.getParameter("boardType") != null) {
+        	boardType = Integer.parseInt(multi.getParameter("boardType"));
+        }
         
         // userType가져오기
         UserDAO DAO = new UserDAO();
@@ -192,9 +193,9 @@ public class LectureRoomNoticeControlService implements CommandHandler {
  		
  		int startRow = (currentPage - 1) * recordsPerPage;		
  		BoardDAO notice_dao = new BoardDAO();
- 		BoardDTO notice = new BoardDTO(1, userID, classID, boardTitle, boardContent, 0, boardFile, boardRealFile);
+ 		BoardDTO notice = new BoardDTO(boardType, userID, classID, boardTitle, boardContent, 0, boardFile, boardRealFile);
  		notice_dao.insertData(notice);
- 		List<BoardDTO> noticeInfoList = notice_dao.getLists(1, classID, startRow, recordsPerPage);
+ 		List<BoardDTO> noticeInfoList = notice_dao.getLists(boardType, classID, startRow, recordsPerPage);
  		
  		for (BoardDTO noticeInfo : noticeInfoList) {
              String userName = DAO.getUserName(noticeInfo.getUserID());
@@ -202,7 +203,7 @@ public class LectureRoomNoticeControlService implements CommandHandler {
          }
  		
  		// 페이징 처리를 위한 전체 공지사항 수 조회
- 		int totalRecords = notice_dao.getTotalRecords(1, classID);
+ 		int totalRecords = notice_dao.getTotalRecords(boardType, classID);
  		int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
 		
         request.setAttribute("userID", userID);
@@ -216,6 +217,7 @@ public class LectureRoomNoticeControlService implements CommandHandler {
         request.setAttribute("noticeInfoList", noticeInfoList);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("totalPages", totalPages);
+        request.setAttribute("boardType", boardType);
         
         return "lectureRoomNotice";
 	}
@@ -225,6 +227,7 @@ public class LectureRoomNoticeControlService implements CommandHandler {
         String boardContent = null;
         String boardFile = null;
         String boardRealFile = null;
+        int boardType = 0;
 
         BoardDAO notice_dao = new BoardDAO();
         
@@ -261,6 +264,11 @@ public class LectureRoomNoticeControlService implements CommandHandler {
         if(boardIDParameter != null && !boardIDParameter.isEmpty()) {
             boardID = Integer.parseInt(boardIDParameter);
         }
+        String boardTypeParameter = multi.getParameter("boardType");
+        if(boardTypeParameter != null && !boardTypeParameter.isEmpty()) {
+        	boardType = Integer.parseInt(boardTypeParameter);
+        }
+
         File file = multi.getFile("boardFile");
 
         if (file != null) {
@@ -297,11 +305,11 @@ public class LectureRoomNoticeControlService implements CommandHandler {
  		if (request.getParameter("currentPage") != null) {
  		    currentPage = Integer.parseInt(request.getParameter("currentPage"));
  		}
- 		
+ 		System.out.println(boardType);
  		int startRow = (currentPage - 1) * recordsPerPage;		
- 		BoardDTO notice = new BoardDTO(1, boardID, boardTitle, boardContent, boardFile, boardRealFile);
+ 		BoardDTO notice = new BoardDTO(boardType, boardID, boardTitle, boardContent, boardFile, boardRealFile);
  		notice_dao.updateData(notice);
- 		List<BoardDTO> noticeInfoList = notice_dao.getLists(1, classID, startRow, recordsPerPage);
+ 		List<BoardDTO> noticeInfoList = notice_dao.getLists(boardType, classID, startRow, recordsPerPage);
  		
  		for (BoardDTO noticeInfo : noticeInfoList) {
              String userName = DAO.getUserName(noticeInfo.getUserID());
@@ -309,7 +317,7 @@ public class LectureRoomNoticeControlService implements CommandHandler {
          }
  		
  		// 페이징 처리를 위한 전체 공지사항 수 조회
- 		int totalRecords = notice_dao.getTotalRecords(1, classID);
+ 		int totalRecords = notice_dao.getTotalRecords(boardType, classID);
  		int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
 		
         request.setAttribute("userID", userID);
@@ -323,12 +331,20 @@ public class LectureRoomNoticeControlService implements CommandHandler {
         request.setAttribute("noticeInfoList", noticeInfoList);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("totalPages", totalPages);
+        request.setAttribute("boardType", boardType);
         
         return "lectureRoomNotice";	
 	}
 	
 	private String lectureRoomNoticeDeleteAction(HttpServletRequest request, String userID, int classID, int boardID) {
-        // userType가져오기
+		int boardType = 0;
+    	
+    	if(request.getParameter("boardType") != null) {
+    		boardType = Integer.parseInt(request.getParameter("boardType"));
+    	}
+        
+		
+		// userType가져오기
         UserDAO DAO = new UserDAO();
 		String userType = DAO.getUserType(userID);
 		
@@ -386,6 +402,7 @@ public class LectureRoomNoticeControlService implements CommandHandler {
         request.setAttribute("noticeInfoList", noticeInfoList);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("totalPages", totalPages);
+        request.setAttribute("boardType", boardType);
         
         return "lectureRoomNotice";
 	}	

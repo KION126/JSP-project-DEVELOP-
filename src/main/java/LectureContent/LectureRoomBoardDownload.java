@@ -1,4 +1,4 @@
-package LectureRoomNoticeService;
+package LectureContent;
 
 import java.io.File;
 import java.io.FileInputStream;

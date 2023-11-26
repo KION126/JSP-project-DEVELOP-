@@ -31,9 +31,18 @@
 		<%@ include file="layout/lectureRoomSideBar.jsp" %>
 		<div class="col-8 classRoom-main-container">
 			<a href="javascript:lectureRoom(${classID})">강의실 홈</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
-			<a style="font-weight: bold;" href="javascript:lectureRoomNotice(${classID }, 1)">강의 공지</a>
+			<c:choose>
+				<c:when test="${boardType == 1 }">
+					<a style="font-weight: bold;" href="javascript:lectureRoomNotice(${classID }, 1 ,1)">강의 공지</a>
+					<c:set var="boadTitle" value="강의 공지" />
+				</c:when>
+				<c:otherwise>
+					<a style="font-weight: bold;" href="javascript:lectureRoomNotice(${classID }, 1 ,2)">Q & A</a>
+					<c:set var="boadTitle" value="Q & A" />
+				</c:otherwise>
+			</c:choose>
 			<div class="classRoom-notice" style="height: 700px;">
-				<h3 style="font-weight: bold; text-align: center;">강의 공지</h3>
+				<h3 style="font-weight: bold; text-align: center;">${boadTitle }</h3>
 				<div class="notice-search-container">
 				    <form id="searchForm" method="post" action="lectureRoomNoticeSearch.do">
 				        <select class="notice-search-select" id="searchOption" name="searchOption">
@@ -43,9 +52,12 @@
 				        </select>
 				        <input class="notice-search-input" type="text" id="searchKeyword" name="searchKeyword" placeholder="검색어를 입력하세요">
 				        <input type="hidden" name="classID" value="${classID }">
+				        <input type="hidden" name="boardType" value="${boardType}">
 				        <button type="submit" class="btn-notice-search">검색</button>
-				        <button type="button" class="btn-notice-search" onclick="javascript:lectureRoomNotice(${classID }, 1)">검색 취소</button>
-				        <button type="button" class="btn-notice-write" onclick="lectureRoomNoticeWrite(${classID })">글쓰기</button>
+				        <button type="button" class="btn-notice-search" onclick="javascript:lectureRoomNotice(${classID }, 1, ${boardType })">검색 취소</button>
+				        <c:if test="${userType eq lectuerType }">
+						    <button type="button" class="btn-lectureContent-write" onclick="lectureRoomNoticeWrite(${classID})">글쓰기</button>
+						</c:if>
 				    </form>
 				</div>
 				<table class="table table-striped table-hover">
