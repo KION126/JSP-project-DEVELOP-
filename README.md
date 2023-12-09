@@ -1,7 +1,7 @@
 # 대학교 JSP과목 기말 프로젝트
 
 ### 온라인 강의 플랫폼
-<img src="https://github.com/KION126/jsp-project-develop/assets/73977410/1c3a2287-c55d-4f0d-a7c6-4df3df05d232"  width="200" height="80"/>
+<img src="https://github.com/KION126/jsp-project-develop/assets/73977410/4b40d749-9c21-45d2-9204-332980f5672c"  width="200" height="80"/>
 <hr>
 
 ◤Platforms & Languages<br>
