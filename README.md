@@ -1,6 +1,6 @@
 # 대학교 JSP과목 기말 프로젝트
 
-온라인 강의 플랫폼 #**DEVELOP**
+온라인 강의 플랫폼 **DEVELOP**
 
 ●Platforms & Languages<br>
 ![html](https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white)
