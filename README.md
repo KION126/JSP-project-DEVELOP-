@@ -11,7 +11,6 @@ Platforms & Languages<br>
 
 Tools<br>
 ![eclips](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white)
-![eclips](https://img.shields.io/badge/apachetomcat-2C2255?style=for-the-badge&logo=apachetomcat&logoColor=white)
-<img src="https://img.shields.io/badge/Apache Tomcat-F8DC75?style=flat-square&logo=apachetomcat&logoColor=white"/>
+![tomcat](https://img.shields.io/badge/apachetomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white)
 
 
