@@ -1,6 +1,7 @@
 # 대학교 JSP과목 기말 프로젝트
 
 온라인 강의 플랫폼 **DEVELOP**
+<hr>
 
 ◤Platforms & Languages<br>
 ![html](https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white)
@@ -12,6 +13,7 @@
 ◤Tools<br>
 ![eclips](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white)
 ![tomcat](https://img.shields.io/badge/Tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black)
+<hr>
 
 ◤메인화면<br>
 ![image](https://github.com/KION126/jsp-project-develop/assets/73977410/4897eb63-d34e-406a-8375-a0f537a319b4)
