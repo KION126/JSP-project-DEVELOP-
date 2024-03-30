@@ -19,4 +19,7 @@
 ◤메인화면<br>
 <img src="https://github.com/KION126/jsp-project-develop/assets/73977410/4897eb63-d34e-406a-8375-a0f537a319b4"  width="500" height="500"/>
 
+◤시연 영상<br>
+https://www.youtube.com/watch?v=NS61b8G-Pgg
+
 
